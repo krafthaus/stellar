@@ -13,7 +13,6 @@ namespace KraftHaus\Stellar\Routing;
 
 class ResourceRegistrar extends \Illuminate\Routing\ResourceRegistrar
 {
-
     /**
      * Get the name for a grouped resource.
      *

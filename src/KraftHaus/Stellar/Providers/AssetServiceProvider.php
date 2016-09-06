@@ -17,7 +17,6 @@ use KraftHaus\Stellar\Support\Facades\Asset as Facade;
 
 class AssetServiceProvider extends ServiceProvider
 {
-
     /**
      * Register the service provider.
      */

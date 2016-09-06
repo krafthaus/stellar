@@ -13,7 +13,6 @@ namespace KraftHaus\Stellar\Resources\Assets;
 
 class Dependencies
 {
-
     /**
      * @var array
      */

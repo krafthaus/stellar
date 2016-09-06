@@ -15,7 +15,6 @@ use KraftHaus\Stellar\Support\License;
 
 class Installed
 {
-
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

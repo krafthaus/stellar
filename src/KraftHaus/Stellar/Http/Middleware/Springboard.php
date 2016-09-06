@@ -13,7 +13,6 @@ namespace KraftHaus\Stellar\Http\Middleware;
 
 class Springboard
 {
-
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

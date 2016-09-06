@@ -16,7 +16,6 @@ use Illuminate\Support\Collection;
 
 class Asset
 {
-
     /**
      * @var Collection
      */

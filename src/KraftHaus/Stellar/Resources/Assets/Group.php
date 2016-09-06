@@ -15,7 +15,6 @@ use Illuminate\Support\Collection;
 
 class Group
 {
-
     /**
      * @var Collection
      */

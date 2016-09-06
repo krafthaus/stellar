@@ -18,7 +18,6 @@ use KraftHaus\Stellar\Http\Requests\SpringboardRequest;
 
 class SpringboardController extends Controller
 {
-
     /**
      * @return \Illuminate\Http\Response
      */

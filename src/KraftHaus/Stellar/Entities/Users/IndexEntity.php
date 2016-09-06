@@ -17,7 +17,6 @@ use KraftHaus\Stellar\Database\Eloquent\Models\User;
 
 class IndexEntity extends Entity
 {
-
     /**
      * The entity model.
      * @var string

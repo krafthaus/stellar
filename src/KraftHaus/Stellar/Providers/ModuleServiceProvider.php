@@ -16,7 +16,6 @@ use KraftHaus\Stellar\Module\Registrar;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-
     /**
      * Boot the service provider.
      */
