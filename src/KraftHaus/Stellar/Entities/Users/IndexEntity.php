@@ -26,19 +26,20 @@ class IndexEntity extends Entity
 
     public function index(Mapper $mapper)
     {
-        $div = $mapper->make('sdiv', [
+        $table = $mapper->make('table', [
             'props' => [
-                'title' => 'gaaf'
+                'fields' => [
+                    'id'   => ['label' => 'ID'],
+                    'name' => ['label' => 'Name']
+                ]
             ]
         ]);
 
         $mapper->add('form', [
             'props' => [
-                'method' => 'post',
-                'action' => '#'
             ],
             'children' => [
-                $div
+                $table
             ]
         ]);
     }

@@ -40,5 +40,12 @@ class RouteServiceProvider extends ServiceProvider
         ], function () use ($resourcePath) {
             require $resourcePath . '/routes/guest.php';
         });
+
+        $router->group([
+            'middleware' => ['web'],
+            'namespace' => $this->namespace
+        ], function () use ($resourcePath) {
+            require $resourcePath . '/routes/frontend.php';
+        });
     }
 }

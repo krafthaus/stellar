@@ -12,6 +12,7 @@ namespace KraftHaus\Stellar\Providers;
  */
 
 use KraftHaus\Stellar\Routing\Router;
+use KraftHaus\Stellar\Routing\Frontend;
 
 class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
 {
@@ -22,6 +23,7 @@ class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
     public function register()
     {
         $this->app->singleton('router', Router::class);
+        $this->app->singleton('router.frontend', Frontend::class);
 
         $this->registerMiddlewares(config('stellar.backend-middleware'));
     }

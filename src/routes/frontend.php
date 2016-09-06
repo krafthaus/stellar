@@ -1,7 +1,5 @@
 <?php
 
-namespace KraftHaus\Stellar\Admin\Exceptions;
-
 /*
  * This file is part of the Stellar package.
  *
@@ -11,9 +9,7 @@ namespace KraftHaus\Stellar\Admin\Exceptions;
  * file that was distributed with this source code.
  */
 
-use InvalidArgumentException;
-
-class InvalidWidgetException extends InvalidArgumentException
-{
-
-}
+Route::get('{page}', [
+    'as' => 'stellar.pages.show',
+    'uses' => 'FrontendController@index'
+])->where('page', '^([a-zA-Z0-9\/_\-\.]*)$');

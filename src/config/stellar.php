@@ -79,8 +79,10 @@ return [
     ],
 
     'admin-widgets' => [
+
         'form' => KraftHaus\Stellar\Admin\Widgets\FormWidget::class,
-        'div'  => KraftHaus\Stellar\Admin\Widgets\DivWidget::class
+        'table' => KraftHaus\Stellar\Admin\Widgets\TableWidget::class
+        
     ]
 
 ];

@@ -16,6 +16,7 @@ use KraftHaus\Stellar\Support\Context;
 use KraftHaus\Stellar\Routing\Frontend;
 use Illuminate\Support\ServiceProvider;
 use KraftHaus\Stellar\Providers\RouteServiceProvider;
+use KraftHaus\Stellar\Providers\AssetServiceProvider;
 use KraftHaus\Stellar\Providers\PolicyServiceProvider;
 use KraftHaus\Stellar\Providers\ModuleServiceProvider;
 use KraftHaus\Stellar\Providers\RoutingServiceProvider;
@@ -53,6 +54,9 @@ class StellarServiceProvider extends ServiceProvider
 
         $this->registerProviders();
         $this->registerAliases();
+
+        // Include the helpers file.
+        require __DIR__ . '/helpers.php';
     }
 
     /**
@@ -65,6 +69,7 @@ class StellarServiceProvider extends ServiceProvider
         $this->app->register(PolicyServiceProvider::class);
         $this->app->register(ModuleServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(AssetServiceProvider::class);
     }
 
     /**

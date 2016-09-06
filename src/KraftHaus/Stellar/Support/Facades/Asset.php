@@ -1,6 +1,6 @@
 <?php
 
-namespace KraftHaus\Stellar\Http\Controllers\Users;
+namespace KraftHaus\Stellar\Support\Facades;
 
 /*
  * This file is part of the Stellar package.
@@ -11,16 +11,18 @@ namespace KraftHaus\Stellar\Http\Controllers\Users;
  * file that was distributed with this source code.
  */
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Facade;
 
-class IndexController extends Controller
+class Asset extends Facade
 {
 
     /**
-     * @return \Illuminate\Http\Response
+     * Get the registered name of the facade.
+     *
+     * @return string
      */
-    public function index()
+    protected static function getFacadeAccessor()
     {
-        return view('stellar::screens.users.index');
+        return 'asset';
     }
 }

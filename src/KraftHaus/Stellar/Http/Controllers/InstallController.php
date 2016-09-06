@@ -11,7 +11,6 @@ namespace KraftHaus\Stellar\Http\Controllers;
  * file that was distributed with this source code.
  */
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use KraftHaus\Stellar\StellarServiceProvider;

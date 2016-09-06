@@ -52,7 +52,7 @@ class Frontend
 
         try {
             // First try to find the exact match.
-            return $this->website = Website::activated()
+            return Website::activated()
                 ->byDomain($url)
                 ->sorted()
                 ->firstOrFail();
@@ -65,12 +65,17 @@ class Frontend
 
             foreach ($websites as $website) {
                 if ((bool) strstr(str_finish($url, '/'), str_finish($website->domain, '/')) === true) {
-                    return $this->website = $website;
+                    return $website;
                 }
             }
         }
 
         abort(404);
+    }
+
+    public function website()
+    {
+        return $this->website;
     }
 
     /**
@@ -90,6 +95,11 @@ class Frontend
         } catch (ModelNotFoundException $e) {
             abort(404);
         }
+    }
+
+    public function page()
+    {
+        return $this->page;
     }
 
     /**

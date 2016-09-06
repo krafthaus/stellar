@@ -25,7 +25,7 @@ class WebsitePolicy
      *
      * @return bool
      */
-    public function access(User $user, Website $website): bool
+    public function access(User $user, Website $website)
     {
         return $user->websites->contains($website->getKey());
     }

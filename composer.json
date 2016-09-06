@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "description": "The Laravel CMS.",
+  "keywords": ["cms", "framework", "laravel"],
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": ">=5.6.4"
+  },
+  "require-dev": {
+    "graham-campbell/testbench": "^3.1",
+    "phpunit/phpunit": "~4.1",
+    "mockery/mockery": "dev-master",
+    "illuminate/database": "~5.0"
+  },
+  "autoload": {
+    "psr-4": { "KraftHaus\\Stellar\\": "src/KraftHaus/Stellar" }
+  },
+  "autoload-dev": {
+    "psr-4" : { "KraftHaus\\Stellar\\Tests\\" : "tests" }
+  },
+  "minimum-stability": "dev"
+}

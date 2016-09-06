@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ Lang::locale() }}">
 <head>
 
     <meta charset="utf-8">
@@ -8,10 +8,7 @@
 
     <title>{{ title_case(app()->environment()) }}</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/stellar.css">
-    @stack('stylesheets')
-
+    {{ css_assets('backend.css') }}
     <script>
         window.Stellar = {
             csrfToken: '{{ csrf_token() }}',
@@ -24,10 +21,7 @@
 
     @yield('content')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="/js/stellar.js"></script>
-    @stack('javascripts')
-
+    {{ js_assets('backend.js') }}
     <script>
         $.fx.speeds._default = 100;
         $.ajaxSetup({

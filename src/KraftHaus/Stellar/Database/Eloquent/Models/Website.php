@@ -11,6 +11,7 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
  * file that was distributed with this source code.
  */
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
@@ -34,5 +35,29 @@ class Website extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
+
+    /**
+     * @param  Builder  $query
+     * @param  string   $domain
+     */
+    public function scopeByDomain($query, $domain)
+    {
+        $query->where('domain', $domain);
+    }
+
+    /**
+     * Sort the query based on the domain length (shorty's first y'all).
+     *
+     * @param  Builder  $query
+     */
+    public function scopeSorted($query)
+    {
+        $query->orderByRaw('LENGTH(`domain`) DESC');
     }
 }
