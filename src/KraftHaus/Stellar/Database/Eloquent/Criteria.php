@@ -16,12 +16,11 @@ use KraftHaus\Stellar\Contracts\RepositoryInterface;
 
 abstract class Criteria
 {
-
     /**
      * @param  Model                $model
      * @param  RepositoryInterface  $repositry
      *
      * @return mixed
      */
-    public abstract function apply($model, RepositoryInterface $repositry);
+    abstract public function apply($model, RepositoryInterface $repositry);
 }

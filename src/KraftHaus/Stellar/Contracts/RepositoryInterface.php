@@ -13,15 +13,23 @@ namespace KraftHaus\Stellar\Contracts;
 
 interface RepositoryInterface
 {
-
     public function all($columns = ['*']);
+
     public function paginate($perPage = 1, $columns = ['*']);
+
     public function create(array $data);
+
     public function save(array $data);
+
     public function update($id, array $data);
+
     public function delete($id);
+
     public function find($id, $columns = ['*']);
+
     public function findBy($column, $value, $columns = ['*']);
+
     public function findAllBy($column, $value, $columns = ['*']);
+
     public function findWhere($column, $columns = ['*']);
 }
