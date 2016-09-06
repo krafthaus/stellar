@@ -37,7 +37,7 @@ class SessionsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors([
-            'email' => 'These credentials do not match our records.'
+            'email' => 'These credentials do not match our records.',
         ]);
     }
 }

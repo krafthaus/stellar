@@ -30,7 +30,7 @@ class IndexEntity extends Entity
             'props' => [
                 'fields' => [
                     'id'   => ['label' => 'ID'],
-                    'name' => ['label' => 'Name']
+                    'name' => ['label' => 'Name'],
                 ]
             ]
         ]);
@@ -40,7 +40,7 @@ class IndexEntity extends Entity
             ],
             'children' => [
                 $table
-            ]
+            ],
         ]);
     }
 }

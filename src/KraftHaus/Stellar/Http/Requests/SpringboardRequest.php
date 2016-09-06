@@ -35,7 +35,7 @@ class SpringboardRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'domain' => 'required'
+            'domain' => 'required',
         ];
     }
 }

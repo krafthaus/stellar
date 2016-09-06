@@ -25,10 +25,10 @@ class RouteServiceProvider extends ServiceProvider
 
     public function map(Router $router)
     {
-        $resourcePath = __DIR__ . '/../../..';
+        $resourcePath = __DIR__.'/../../..';
 
         $router->backend(function () use ($resourcePath) {
-            require $resourcePath . '/routes/guarded.php';
+            require $resourcePath.'/routes/guarded.php';
         }, ['namespace' => $this->namespace]);
 
         $prefix = config('stellar.backend-uri');
@@ -36,16 +36,16 @@ class RouteServiceProvider extends ServiceProvider
         $router->group([
             'middleware' => ['web'],
             'namespace'  => $this->namespace,
-            'prefix'     => $prefix
+            'prefix'     => $prefix,
         ], function () use ($resourcePath) {
-            require $resourcePath . '/routes/guest.php';
+            require $resourcePath.'/routes/guest.php';
         });
 
         $router->group([
             'middleware' => ['web'],
-            'namespace' => $this->namespace
+            'namespace' => $this->namespace,
         ], function () use ($resourcePath) {
-            require $resourcePath . '/routes/frontend.php';
+            require $resourcePath.'/routes/frontend.php';
         });
     }
 }

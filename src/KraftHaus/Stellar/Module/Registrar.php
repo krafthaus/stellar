@@ -158,7 +158,7 @@ class Registrar
         $values[$key] = $value;
 
         $content = $this->getCache()->merge(collect([
-            $module->keys()->first() => $values
+            $module->keys()->first() => $values,
         ]))->all();
 
         return $this->files->put($this->getCachePath(), json_encode($content, JSON_PRETTY_PRINT));
@@ -205,7 +205,7 @@ class Registrar
      */
     public function isDisabled($slug)
     {
-        return !$this->isEnabled($slug);
+        return ! $this->isEnabled($slug);
     }
 
     /**
@@ -215,7 +215,7 @@ class Registrar
      */
     public function enable($slug)
     {
-        $this->set($slug . '::enabled', true);
+        $this->set($slug.'::enabled', true);
     }
 
     /**
@@ -225,7 +225,7 @@ class Registrar
      */
     public function disable($slug)
     {
-        $this->set($slug . '::enabled', false);
+        $this->set($slug.'::enabled', false);
     }
 
     /**
@@ -236,7 +236,7 @@ class Registrar
     protected function registerServiceProvider(array $properties)
     {
         $namespace = $this->resolveNamespace($properties);
-        $provider  = sprintf('%s\\%2$s\\Providers\\%2$sServiceProvider', $this->getNamespace(), $namespace);
+        $provider = sprintf('%s\\%2$s\\Providers\\%2$sServiceProvider', $this->getNamespace(), $namespace);
 
         if (class_exists($provider)) {
             $this->app->register($provider);
@@ -252,10 +252,11 @@ class Registrar
     {
         if (isset($properties['autoload'])) {
             $namespace = $this->resolveNamespace($properties);
-            $path      = $this->getPath() . "/{$namespace}/";
+
+            $path  = $this->getPath() . "/{$namespace}/";
 
             foreach ($properties['autoload'] as $file) {
-                require $path . $file;
+                require $path.$file;
             }
         }
     }
@@ -286,7 +287,8 @@ class Registrar
     {
         if ($slug) {
             $module = studly_case($slug);
-            $path   = $this->getManifestPath($module);
+
+            $path = $this->getManifestPath($module);
 
             $contents = $this->files->get($path);
 
@@ -347,7 +349,7 @@ class Registrar
     {
         $path = $this->getCachePath();
 
-        if (!$this->files->exists($path)) {
+        if (! $this->files->exists($path)) {
             $content = json_encode([], JSON_PRETTY_PRINT);
 
             $this->files->put($path, $content);
@@ -379,11 +381,11 @@ class Registrar
         });
 
         $modules->each(function ($module) {
-            if (!$module->has('enabled')) {
+            if (! $module->has('enabled')) {
                 $module->put('enabled', config('stellar.modules-enabled', true));
             }
 
-            if (!$module->has('order')) {
+            if (! $module->has('order')) {
                 $module->put('order', 9001);
             }
 
@@ -428,6 +430,6 @@ class Registrar
      */
     protected function getManifestPath($slug)
     {
-        return $this->getModulePath($slug) . '/manifest.json';
+        return $this->getModulePath($slug).'/manifest.json';
     }
 }

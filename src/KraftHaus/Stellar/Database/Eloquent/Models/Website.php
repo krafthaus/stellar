@@ -26,7 +26,7 @@ class Website extends Model
      */
     protected $fillable = [
         'name',
-        'domain'
+        'domain',
     ];
 
     /**

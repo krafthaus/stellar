@@ -23,7 +23,7 @@ class FrontendController
 
         return view('page')->with([
             'website' => $website,
-            'page' => $page
+            'page' => $page,
         ]);
     }
 }

@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
     ];
 
     /**
@@ -46,7 +46,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         static::create([
             'name' => 'Super User',
             'email' => 'super@user.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
         ]);
     }
 }

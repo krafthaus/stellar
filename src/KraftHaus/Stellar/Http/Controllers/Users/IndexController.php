@@ -12,6 +12,7 @@ namespace KraftHaus\Stellar\Http\Controllers\Users;
  */
 
 use App\Http\Controllers\Controller;
+use KraftHaus\Stellar\Database\Eloquent\Repositories\UserRepository;
 
 class IndexController extends Controller
 {
@@ -19,8 +20,10 @@ class IndexController extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserRepository $user)
     {
-        return view('stellar::screens.users.index');
+        $users = $user->all();
+
+        return view('stellar::screens.users.index')->with(compact('users'));
     }
 }

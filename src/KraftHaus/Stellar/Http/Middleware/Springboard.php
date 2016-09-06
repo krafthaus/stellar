@@ -29,11 +29,11 @@ class Springboard
         if (app('request')->segment(2) !== 'springboard') {
             $website = session('stellar.current-website');
 
-            if (!$website) {
+            if (! $website) {
                 return redirect()->intended(route('backend.springboard.index'));
             }
 
-            if (!policy($website)->access(app('auth')->user(), $website)) {
+            if (! policy($website)->access(app('auth')->user(), $website)) {
                 abort(403);
             }
         }

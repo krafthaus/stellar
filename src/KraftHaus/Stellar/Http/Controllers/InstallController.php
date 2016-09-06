@@ -29,7 +29,7 @@ class InstallController extends Controller
         // Publish the config and migration files.
         Artisan::call('vendor:publish', [
             '--provider' => $provider,
-            '--tag' => ['config', 'migrations']
+            '--tag' => ['config', 'migrations'],
         ]);
 
         // Migrate the database.

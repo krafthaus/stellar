@@ -35,7 +35,7 @@ class Group
     {
         $this->collection = collect([
             'css' => [],
-            'js' => []
+            'js' => [],
         ]);
     }
 
@@ -75,7 +75,7 @@ class Group
             if ($path === $this->lastAddedAsset) {
                 $collection[$path] = [
                     'name' => $item['name'],
-                    'deps' => $dependency
+                    'deps' => $dependency,
                 ];
 
                 $this->collection->put($this->lastAddedType, $collection);
@@ -97,7 +97,7 @@ class Group
         $collection = $this->sortDependencies($this->collection->get('css'), 'css');
 
         foreach ($collection as $key => $value) {
-            $output.= '<link rel="stylesheet" href="' . $value . '">' . "\n";
+            $output .= '<link rel="stylesheet" href="' . $value . '">'."\n";
         }
 
         return $output;
@@ -115,7 +115,7 @@ class Group
         $collection = $this->sortDependencies($this->collection->get('js'), 'js');
 
         foreach ($collection as $key => $value) {
-            $output .= '<script type="text/javascript" src="'.$value.'"></script>' . "\n";
+            $output .= '<script type="text/javascript" src="'.$value.'"></script>'."\n";
         }
 
         return $output;
@@ -159,10 +159,10 @@ class Group
 
         $collection = $this->collection->get($type);
 
-        if (!in_array($asset, $collection)) {
+        if (! in_array($asset, $collection)) {
             $collection[$asset] = [
                 'name' => $name,
-                'deps' => []
+                'deps' => [],
             ];
 
             $this->collection->put($type, $collection);
@@ -182,7 +182,7 @@ class Group
      *
      * @return array
      */
-    protected function sortDependencies($assets = [], $type)
+    protected function sortDependencies($assets, $type)
     {
         $list = [];
 

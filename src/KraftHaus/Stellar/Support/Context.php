@@ -58,7 +58,7 @@ class Context
             $request = $this->app->request;
         }
 
-        return $request->is(config('stellar.backend-uri') . '*')
+        return $request->is(config('stellar.backend-uri').'*')
             ? static::BACKEND
             : static::FRONTEND;
     }
@@ -90,6 +90,6 @@ class Context
      */
     public function isBackend()
     {
-        return !$this->isFrontend();
+        return ! $this->isFrontend();
     }
 }

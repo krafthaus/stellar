@@ -23,8 +23,8 @@ class Page extends Model
     /**
      * Scope the query by a certain slug.
      *
-     * @param  Builder  $query
-     * @param  string   $slug
+     * @param Builder  $query
+     * @param string   $slug
      */
     public function scopeBySlug($query, $slug)
     {

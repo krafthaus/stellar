@@ -27,7 +27,7 @@ class ResourceRegistrar extends \Illuminate\Routing\ResourceRegistrar
     {
         $group = ltrim(str_replace('/', '.', $this->router->getLastGroupPrefix()), '.');
 
-        if (!empty($group) && $group == config('stellar.backend-uri')) {
+        if (! empty($group) && $group == config('stellar.backend-uri')) {
             return trim("{$prefix}backend.{$resource}.{$method}", '.');
         }
 

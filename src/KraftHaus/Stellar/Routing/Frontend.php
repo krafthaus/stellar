@@ -33,7 +33,7 @@ class Frontend
 
     public function __construct()
     {
-        if (Context::isFrontend() && !app()->runningInConsole()) {
+        if (Context::isFrontend() && ! app()->runningInConsole()) {
             $this->website = $this->discoverWebsite();
             $this->page = $this->discoverPage();
         }
@@ -109,7 +109,7 @@ class Frontend
      */
     protected function getStrippedUrl()
     {
-        return str_replace(parse_url($url = request()->url(), PHP_URL_SCHEME) . '://', '', $url);
+        return str_replace(parse_url($url = request()->url(), PHP_URL_SCHEME).'://', '', $url);
     }
 
     /**

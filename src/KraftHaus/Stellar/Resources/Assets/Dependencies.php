@@ -34,7 +34,7 @@ class Dependencies
         $dependencies = $this->parseDependencyList($dependencies);
 
         foreach ($dependencies as $pair) {
-            list ($asset, $dependency) = each ($pair);
+            list($asset, $dependency) = each ($pair);
 
             if (! isset($this->nodes[$asset])) {
                 $this->nodes[$asset] = new Node($asset);
