@@ -31,15 +31,15 @@ class IndexEntity extends Entity
                 'fields' => [
                     'id'   => ['label' => 'ID'],
                     'name' => ['label' => 'Name'],
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $mapper->add('form', [
             'props' => [
             ],
             'children' => [
-                $table
+                $table,
             ],
         ]);
     }

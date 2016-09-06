@@ -10,9 +10,9 @@
  */
 
 Route::resource('sessions', 'Auth\SessionsController', [
-    'only' => ['create', 'store']
+    'only' => ['create', 'store'],
 ]);
 
 Route::resource('install', 'InstallController', [
-    'only' => ['index', 'store']
+    'only' => ['index', 'store'],
 ]);

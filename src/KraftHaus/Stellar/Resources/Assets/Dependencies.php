@@ -34,7 +34,7 @@ class Dependencies
         $dependencies = $this->parseDependencyList($dependencies);
 
         foreach ($dependencies as $pair) {
-            list($asset, $dependency) = each ($pair);
+            list($asset, $dependency) = each($pair);
 
             if (! isset($this->nodes[$asset])) {
                 $this->nodes[$asset] = new Node($asset);
@@ -96,7 +96,7 @@ class Dependencies
         $looseNodes = [];
 
         foreach ($this->roots as $name) {
-            if (!in_array($name, $sorted)) {
+            if (! in_array($name, $sorted)) {
                 $looseNodes[] = $name;
             }
         }
@@ -116,7 +116,7 @@ class Dependencies
         $roots = [];
 
         foreach ($nodes as $name => $node) {
-            if (!count($node->parents)) {
+            if (! count($node->parents)) {
                 $roots[$name] = $node;
             }
         }

@@ -253,7 +253,7 @@ class Registrar
         if (isset($properties['autoload'])) {
             $namespace = $this->resolveNamespace($properties);
 
-            $path  = $this->getPath() . "/{$namespace}/";
+            $path = $this->getPath()."/{$namespace}/";
 
             foreach ($properties['autoload'] as $file) {
                 require $path.$file;

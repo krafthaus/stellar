@@ -97,7 +97,7 @@ class Group
         $collection = $this->sortDependencies($this->collection->get('css'), 'css');
 
         foreach ($collection as $key => $value) {
-            $output .= '<link rel="stylesheet" href="' . $value . '">'."\n";
+            $output .= '<link rel="stylesheet" href="'.$value.'">'."\n";
         }
 
         return $output;

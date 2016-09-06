@@ -12,7 +12,7 @@
 use Illuminate\Support\HtmlString;
 use KraftHaus\Stellar\Support\Facades\Asset;
 
-if (!function_exists('css_assets')) {
+if (! function_exists('css_assets')) {
 
     /**
      * @param  string  $namespace
@@ -31,7 +31,7 @@ if (!function_exists('css_assets')) {
     }
 }
 
-if (!function_exists('js_assets')) {
+if (! function_exists('js_assets')) {
 
     /**
      * @param  string  $namespace

@@ -81,7 +81,7 @@ return [
     'admin-widgets' => [
 
         'form' => KraftHaus\Stellar\Admin\Widgets\FormWidget::class,
-        'table' => KraftHaus\Stellar\Admin\Widgets\TableWidget::class
+        'table' => KraftHaus\Stellar\Admin\Widgets\TableWidget::class,
         
     ]
 

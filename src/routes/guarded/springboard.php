@@ -11,20 +11,20 @@
 
 Route::get('springboard', [
     'as' => 'backend.springboard.index',
-    'uses' => 'Auth\SpringboardController@index'
+    'uses' => 'Auth\SpringboardController@index',
 ]);
 
 Route::get('springboard/create', [
     'as' => 'backend.springboard.create',
-    'uses' => 'Auth\SpringboardController@create'
+    'uses' => 'Auth\SpringboardController@create',
 ]);
 
 Route::post('springboard/create', [
     'as' => 'backend.springboard.store',
-    'uses' => 'Auth\SpringboardController@store'
+    'uses' => 'Auth\SpringboardController@store',
 ]);
 
 Route::get('springboard/{website}', [
     'as' => 'backend.springboard.open',
-    'uses' => 'Auth\SpringboardController@open'
+    'uses' => 'Auth\SpringboardController@open',
 ]);

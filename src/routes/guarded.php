@@ -13,5 +13,5 @@ Route::get('/', function () {
     return 'to be implemented';
 });
 
-require __DIR__ . '/guarded/springboard.php';
-require __DIR__ . '/guarded/users.php';
+require __DIR__.'/guarded/springboard.php';
+require __DIR__.'/guarded/users.php';

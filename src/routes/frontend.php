@@ -11,5 +11,5 @@
 
 Route::get('{page}', [
     'as' => 'stellar.pages.show',
-    'uses' => 'FrontendController@index'
+    'uses' => 'FrontendController@index',
 ])->where('page', '^([a-zA-Z0-9\/_\-\.]*)$');
