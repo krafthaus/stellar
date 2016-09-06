@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Activatable
 {
-
     /**
      * Activate the current model.
      */

@@ -16,7 +16,6 @@ use KraftHaus\Stellar\Database\Eloquent\Models\Website;
 
 class WebsitePolicy
 {
-
     /**
      * Determine that the given user has access to a certain website.
      *

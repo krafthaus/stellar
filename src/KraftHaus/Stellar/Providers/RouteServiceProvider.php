@@ -16,7 +16,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-
     /**
      * The controller namespace of the module.
      * @var string

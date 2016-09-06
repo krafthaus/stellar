@@ -16,7 +16,6 @@ use KraftHaus\Stellar\Database\Eloquent\Models\User;
 
 class UserRepository extends Repository
 {
-
     /**
      * Specify the model class name.
      *

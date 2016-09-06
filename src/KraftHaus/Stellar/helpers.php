@@ -26,8 +26,6 @@ if (! function_exists('css_assets')) {
         if ($namespace) {
             return new HtmlString($namespace->css());
         }
-
-        return null;
     }
 }
 
@@ -45,7 +43,5 @@ if (! function_exists('js_assets')) {
         if ($namespace) {
             return new HtmlString($namespace->js());
         }
-
-        return null;
     }
 }

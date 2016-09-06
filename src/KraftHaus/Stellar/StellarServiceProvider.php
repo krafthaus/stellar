@@ -24,7 +24,6 @@ use KraftHaus\Stellar\Providers\ConsoleServiceProvider;
 
 class StellarServiceProvider extends ServiceProvider
 {
-
     /**
      * Boot the service provider.
      */

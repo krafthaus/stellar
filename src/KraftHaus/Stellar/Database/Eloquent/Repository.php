@@ -20,7 +20,6 @@ use KraftHaus\Stellar\Exceptions\RepositoryException;
 
 abstract class Repository implements RepositoryInterface, CriteriaInterface
 {
-
     /**
      * @var Application
      */

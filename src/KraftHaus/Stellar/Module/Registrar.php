@@ -18,7 +18,6 @@ use Illuminate\Foundation\Application;
 
 class Registrar
 {
-
     /**
      * @var Application
      */
