@@ -12,24 +12,20 @@ namespace KraftHaus\Stellar\Providers;
  */
 
 use Illuminate\Support\ServiceProvider;
-use KraftHaus\Stellar\Module\Registrar;
 
 class ModuleServiceProvider extends ServiceProvider
 {
 
-    /**
-     * Boot the service provider.
-     */
-    public function boot()
+    protected function addMiddleware($middleware)
     {
-        $this->app['modules']->register();
-    }
+        $kernel = $this->app['Illuminate\Contracts\Http\Kernel'];
 
-    /**
-     * Register the service provider.
-     */
-    public function register()
-    {
-        $this->app->singleton('modules', Registrar::class);
+        if (is_array($middleware)) {
+            foreach ($middleware as $ware) {
+                $kernel->pushMiddleware($ware);
+            }
+        } else {
+            $kernel->pushMiddleware($middleware);
+        }
     }
 }

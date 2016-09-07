@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
-Route::get('/', function () {
-    return 'to be implemented';
-});
+Route::get('/', [
+    'as' => 'backend.dashboard',
+    function () {
+        return 'to be implemented';
+    }
+]);
 
 require __DIR__.'/guarded/springboard.php';
 require __DIR__.'/guarded/users.php';

@@ -13,24 +13,21 @@ namespace KraftHaus\Stellar\Http\Controllers\Users;
 
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use KraftHaus\Stellar\Support\Facades\Theme;
 use KraftHaus\Stellar\Database\Eloquent\Repositories\UserRepository;
 
-class IndexController extends Controller
+class PermissionsController extends Controller
 {
 
     public function __construct()
     {
-        view()->share('sidebar_active', 'users');
+        view()->share('sidebar_active', 'permissions');
     }
 
     /**
      * @return Response
      */
-    public function index(UserRepository $user)
+    public function index()
     {
-        $users = $user->all();
-
-        return Theme::view('screens.users.index')->with(compact('users'));
+        return view('stellar::screens.users.permissions.index');
     }
 }

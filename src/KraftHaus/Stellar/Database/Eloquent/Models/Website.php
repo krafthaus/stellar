@@ -36,6 +36,9 @@ class Website extends Model
         return $this->belongsToMany(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function pages()
     {
         return $this->hasMany(Page::class);

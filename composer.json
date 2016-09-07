@@ -5,13 +5,15 @@
   "license": "MIT",
   "type": "library",
   "require": {
-    "php": ">=5.6.4"
+    "php": ">=5.6.4",
+    "maatwebsite/laravel-sidebar": "~2.1"
   },
   "require-dev": {
     "graham-campbell/testbench": "^3.1",
     "phpunit/phpunit": "~4.1",
     "mockery/mockery": "dev-master",
-    "illuminate/database": "~5.0"
+    "illuminate/database": "~5.0",
+    "friendsofphp/php-cs-fixer": "^1.12"
   },
   "autoload": {
     "psr-4": { "KraftHaus\\Stellar\\": "src/KraftHaus/Stellar" }

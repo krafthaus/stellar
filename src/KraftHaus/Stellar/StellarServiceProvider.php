@@ -12,15 +12,20 @@ namespace KraftHaus\Stellar;
  */
 
 use KraftHaus\Stellar\Admin\Factory;
+use KraftHaus\Stellar\Providers\ThemeServiceProvider;
 use KraftHaus\Stellar\Support\Context;
 use KraftHaus\Stellar\Routing\Frontend;
+use Maatwebsite\Sidebar\SidebarManager;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Sidebar\SidebarServiceProvider;
+use KraftHaus\Stellar\Resources\Sidebar\Creator;
 use KraftHaus\Stellar\Providers\RouteServiceProvider;
 use KraftHaus\Stellar\Providers\AssetServiceProvider;
 use KraftHaus\Stellar\Providers\PolicyServiceProvider;
-use KraftHaus\Stellar\Providers\ModuleServiceProvider;
+use KraftHaus\Stellar\Providers\ModulesServiceProvider;
 use KraftHaus\Stellar\Providers\RoutingServiceProvider;
 use KraftHaus\Stellar\Providers\ConsoleServiceProvider;
+use KraftHaus\Stellar\Resources\Sidebar\Registrar as Sidebar;
 
 class StellarServiceProvider extends ServiceProvider
 {
@@ -28,7 +33,7 @@ class StellarServiceProvider extends ServiceProvider
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(SidebarManager $manager)
     {
         $this->publishes([
             __DIR__.'/../../config/stellar.php' => config_path('stellar.php')
@@ -43,6 +48,8 @@ class StellarServiceProvider extends ServiceProvider
         ], 'views');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'stellar');
+
+        $manager->register(Sidebar::class);
     }
 
     /**
@@ -54,9 +61,8 @@ class StellarServiceProvider extends ServiceProvider
 
         $this->registerProviders();
         $this->registerAliases();
-
-        // Include the helpers file.
-        require __DIR__.'/helpers.php';
+        $this->registerHelpers();
+        $this->registerSidebarMenu();
     }
 
     /**
@@ -66,10 +72,12 @@ class StellarServiceProvider extends ServiceProvider
     {
         $this->app->register(RoutingServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
+        $this->app->register(SidebarServiceProvider::class);
+        $this->app->register(ModulesServiceProvider::class);
         $this->app->register(PolicyServiceProvider::class);
-        $this->app->register(ModuleServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(AssetServiceProvider::class);
+        $this->app->register(ThemeServiceProvider::class);
     }
 
     /**
@@ -80,5 +88,24 @@ class StellarServiceProvider extends ServiceProvider
         $this->app->singleton('frontend', Frontend::class);
         $this->app->singleton('context', Context::class);
         $this->app->singleton('admin', Factory::class);
+    }
+
+    /**
+     * Include the helpers file.
+     */
+    protected function registerHelpers()
+    {
+        require __DIR__.'/helpers.php';
+    }
+
+    /**
+     * Register the sidebar component.
+     */
+    protected function registerSidebarMenu()
+    {
+        view()->creator(
+            'stellar::components.sidebar',
+            Creator::class
+        );
     }
 }

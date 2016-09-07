@@ -14,6 +14,7 @@ namespace KraftHaus\Stellar\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class Authenticate
 {
@@ -22,7 +23,7 @@ class Authenticate
      * @param  Request  $request
      * @param  Closure  $next
      *
-     * @return Response
+     * @return RedirectResponse|Response
      */
     public function handle($request, Closure $next)
     {

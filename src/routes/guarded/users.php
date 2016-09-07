@@ -9,4 +9,6 @@
  * file that was distributed with this source code.
  */
 
+Route::resource('users/permissions', 'Users\PermissionsController');
+Route::resource('users/roles', 'Users\RolesController');
 Route::resource('users', 'Users\IndexController');
