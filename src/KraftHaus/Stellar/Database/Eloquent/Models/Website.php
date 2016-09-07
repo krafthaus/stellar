@@ -17,6 +17,7 @@ use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Website extends Model
 {
+
     use Activatable;
 
     /**
@@ -24,8 +25,7 @@ class Website extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'domain',
+        'name', 'domain',
     ];
 
     /**

@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
 
 class Asset
 {
+
     /**
      * @var Collection
      */
@@ -58,21 +59,5 @@ class Asset
     public function get($namespace)
     {
         return $this->collection->get($namespace, null);
-    }
-
-    /**
-     * @param  string  $namespace
-     *
-     * @return null|string
-     */
-    public function css($namespace)
-    {
-        $collection = $this->collection->get($namespace);
-
-        if ($collection === null) {
-            return '';
-        }
-
-        return $collection->css();
     }
 }

@@ -16,6 +16,7 @@ use KraftHaus\Stellar\Contracts\RepositoryInterface;
 
 abstract class Criteria
 {
+
     /**
      * @param  Model                $model
      * @param  RepositoryInterface  $repositry

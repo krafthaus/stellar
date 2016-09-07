@@ -16,6 +16,7 @@ use Illuminate\Foundation\Application;
 
 class Context
 {
+
     const FRONTEND = 'frontend';
     const BACKEND = 'backend';
 

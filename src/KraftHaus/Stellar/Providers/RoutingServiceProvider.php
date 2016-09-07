@@ -16,6 +16,7 @@ use KraftHaus\Stellar\Routing\Frontend;
 
 class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
 {
+
     /**
      * Register the service provider.
      */

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Frontend
 {
+
     /**
      * The current website.
      * @var Website

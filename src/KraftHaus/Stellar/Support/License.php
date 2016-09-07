@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Support;
 
 abstract class License
 {
+
     /**
      * Try to validate the license.
      *

@@ -17,6 +17,7 @@ use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Page extends Model
 {
+
     use Activatable;
 
     /**

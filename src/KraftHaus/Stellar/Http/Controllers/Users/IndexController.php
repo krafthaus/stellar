@@ -16,6 +16,7 @@ use KraftHaus\Stellar\Database\Eloquent\Repositories\UserRepository;
 
 class IndexController extends Controller
 {
+
     /**
      * @return \Illuminate\Http\Response
      */

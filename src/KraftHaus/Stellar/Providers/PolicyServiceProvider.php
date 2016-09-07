@@ -17,6 +17,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 
 class PolicyServiceProvider extends AuthServiceProvider
 {
+
     /**
      * The policy mapping.
      * @var array

@@ -11,15 +11,20 @@ namespace KraftHaus\Stellar\Http\Middleware;
  * file that was distributed with this source code.
  */
 
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class Authenticate
 {
+
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param  Closure  $next
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function handle($request, \Closure $next)
+    public function handle($request, Closure $next)
     {
         if (app('auth')->guest()) {
             // No redirects for ajax requests.

@@ -15,6 +15,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class SpringboardRequest extends FormRequest
 {
+
     /**
      * Pre-authorize the user.
      *

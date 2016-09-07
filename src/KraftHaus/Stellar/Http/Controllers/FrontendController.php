@@ -15,6 +15,7 @@ use KraftHaus\Stellar\Support\Facades\Frontend;
 
 class FrontendController
 {
+
     public function index()
     {
         $website = Frontend::website();

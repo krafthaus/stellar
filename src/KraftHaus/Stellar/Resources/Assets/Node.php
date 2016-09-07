@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Resources\Assets;
 
 class Node
 {
+
     /**
      * @var string
      */

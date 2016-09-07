@@ -18,6 +18,7 @@ use KraftHaus\Stellar\Database\Eloquent\Models\User;
 
 class InstallController extends Controller
 {
+
     /**
      * @return \Illuminate\Http\Response
      */

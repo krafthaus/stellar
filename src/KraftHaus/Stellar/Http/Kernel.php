@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Http;
 
 trait Kernel
 {
+
     /**
      * Get the route dispatcher callback.
      *

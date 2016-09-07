@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Routing;
 
 class Router extends \Illuminate\Routing\Router
 {
+
     /**
      * Create a backend route group.
      *

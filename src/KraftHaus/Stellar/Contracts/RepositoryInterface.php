@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Contracts;
 
 interface RepositoryInterface
 {
+
     public function all($columns = ['*']);
 
     public function paginate($perPage = 1, $columns = ['*']);

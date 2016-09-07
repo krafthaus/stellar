@@ -16,6 +16,7 @@ use Illuminate\Routing\Controller;
 
 class SessionsController extends Controller
 {
+
     /**
      * @return \Illuminate\Http\Response
      */

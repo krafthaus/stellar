@@ -19,6 +19,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+
     use CanResetPassword;
     use Authenticatable;
 
@@ -27,9 +28,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -40,9 +39,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(Website::class);
     }
 
+    /**
+     * Create the new super user. (there can only be one of this).
+     *
+     * @return Model
+     */
     public static function createSuperUser()
     {
-        static::create([
+        return static::create([
             'name' => 'Super User',
             'email' => 'super@user.com',
             'password' => bcrypt('password'),

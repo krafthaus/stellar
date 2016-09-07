@@ -15,6 +15,7 @@ use KraftHaus\Stellar\Database\Eloquent\Criteria;
 
 interface CriteriaInterface
 {
+
     /**
      * @param  bool  $status
      *

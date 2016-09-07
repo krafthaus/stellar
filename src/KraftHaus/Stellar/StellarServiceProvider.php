@@ -24,21 +24,22 @@ use KraftHaus\Stellar\Providers\ConsoleServiceProvider;
 
 class StellarServiceProvider extends ServiceProvider
 {
+
     /**
      * Boot the service provider.
      */
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/stellar.php' => config_path('stellar.php'),
+            __DIR__.'/../../config/stellar.php' => config_path('stellar.php')
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../../database/migrations' => database_path('migrations'),
+            __DIR__.'/../../database/migrations' => database_path('migrations')
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/stellar'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/stellar')
         ], 'views');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'stellar');
@@ -76,8 +77,8 @@ class StellarServiceProvider extends ServiceProvider
      */
     protected function registerAliases()
     {
-        $this->app->singleton('admin', Factory::class);
-        $this->app->singleton('context', Context::class);
         $this->app->singleton('frontend', Frontend::class);
+        $this->app->singleton('context', Context::class);
+        $this->app->singleton('admin', Factory::class);
     }
 }
