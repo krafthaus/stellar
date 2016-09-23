@@ -11,21 +11,23 @@ namespace KraftHaus\Stellar;
  * file that was distributed with this source code.
  */
 
+use Webpatser\Uuid\Uuid;
+use Spatie\Menu\Laravel\MenuFacade;
 use KraftHaus\Stellar\Admin\Factory;
-use KraftHaus\Stellar\Providers\ThemeServiceProvider;
 use KraftHaus\Stellar\Support\Context;
 use KraftHaus\Stellar\Routing\Frontend;
-use Maatwebsite\Sidebar\SidebarManager;
 use Illuminate\Support\ServiceProvider;
-use Maatwebsite\Sidebar\SidebarServiceProvider;
-use KraftHaus\Stellar\Resources\Sidebar\Creator;
+use Spatie\Menu\Laravel\MenuServiceProvider;
+use KraftHaus\Stellar\Providers\FlashServiceProvider;
 use KraftHaus\Stellar\Providers\RouteServiceProvider;
+use KraftHaus\Stellar\Providers\ThemeServiceProvider;
 use KraftHaus\Stellar\Providers\AssetServiceProvider;
 use KraftHaus\Stellar\Providers\PolicyServiceProvider;
+use KraftHaus\Stellar\Providers\StudioServiceProvider;
 use KraftHaus\Stellar\Providers\ModulesServiceProvider;
 use KraftHaus\Stellar\Providers\RoutingServiceProvider;
 use KraftHaus\Stellar\Providers\ConsoleServiceProvider;
-use KraftHaus\Stellar\Resources\Sidebar\Registrar as Sidebar;
+use Prettus\Repository\Providers\RepositoryServiceProvider;
 
 class StellarServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,7 @@ class StellarServiceProvider extends ServiceProvider
     /**
      * Boot the service provider.
      */
-    public function boot(SidebarManager $manager)
+    public function boot()
     {
         $this->publishes([
             __DIR__.'/../../config/stellar.php' => config_path('stellar.php')
@@ -47,9 +49,9 @@ class StellarServiceProvider extends ServiceProvider
             __DIR__.'/../../resources/views' => resource_path('views/vendor/stellar')
         ], 'views');
 
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'stellar');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'stellar');
 
-        $manager->register(Sidebar::class);
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'stellar');
     }
 
     /**
@@ -62,7 +64,6 @@ class StellarServiceProvider extends ServiceProvider
         $this->registerProviders();
         $this->registerAliases();
         $this->registerHelpers();
-        $this->registerSidebarMenu();
     }
 
     /**
@@ -70,14 +71,18 @@ class StellarServiceProvider extends ServiceProvider
      */
     protected function registerProviders()
     {
+        $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(RoutingServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
-        $this->app->register(SidebarServiceProvider::class);
         $this->app->register(ModulesServiceProvider::class);
+        $this->app->register(StudioServiceProvider::class);
         $this->app->register(PolicyServiceProvider::class);
-        $this->app->register(RouteServiceProvider::class);
         $this->app->register(AssetServiceProvider::class);
+        $this->app->register(FlashServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(MenuServiceProvider::class);
+        $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
     }
 
     /**
@@ -88,6 +93,8 @@ class StellarServiceProvider extends ServiceProvider
         $this->app->singleton('frontend', Frontend::class);
         $this->app->singleton('context', Context::class);
         $this->app->singleton('admin', Factory::class);
+        $this->app->alias('Menu', MenuFacade::class);
+        $this->app->alias('Uuid', Uuid::class);
     }
 
     /**
@@ -95,17 +102,6 @@ class StellarServiceProvider extends ServiceProvider
      */
     protected function registerHelpers()
     {
-        require __DIR__.'/helpers.php';
-    }
-
-    /**
-     * Register the sidebar component.
-     */
-    protected function registerSidebarMenu()
-    {
-        view()->creator(
-            'stellar::components.sidebar',
-            Creator::class
-        );
+        require __DIR__ . '/helpers.php';
     }
 }

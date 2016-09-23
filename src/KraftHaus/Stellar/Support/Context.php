@@ -36,6 +36,8 @@ class Context
     public function __construct(Application $app)
     {
         $this->app = $app;
+
+        return view();
     }
 
     /**

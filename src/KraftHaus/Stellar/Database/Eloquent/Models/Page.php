@@ -13,12 +13,14 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
+use KraftHaus\Stellar\Database\Eloquent\Traits\Metable;
 use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Page extends Model
 {
 
     use Activatable;
+    use Metable;
 
     /**
      * Scope the query by a certain slug.
@@ -29,5 +31,40 @@ class Page extends Model
     public function scopeBySlug($query, $slug)
     {
         $query->where('slug', $slug);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function widgets()
+    {
+        return $this->hasMany(Widget::class);
+    }
+
+    /**
+     * Determine that the page has any attached widgets.
+     *
+     * @return bool
+     */
+    public function hasWidgets()
+    {
+        return ! $this->widgets->isEmpty();
+    }
+
+    /**
+     * Create the first root widget for this page.
+     *
+     * @return Widget
+     */
+    public function createRootWidget()
+    {
+        // Create a new root widget instance.
+        $widget = new Widget([
+            'name' => 'root',
+            'classname' => config('stellar.studio-default-widget')
+        ]);
+
+        // Save the widget.
+        return $this->widgets()->save($widget);
     }
 }

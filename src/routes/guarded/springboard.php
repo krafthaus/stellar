@@ -9,22 +9,7 @@
  * file that was distributed with this source code.
  */
 
-Route::get('springboard', [
-    'as' => 'backend.springboard.index',
-    'uses' => 'Auth\SpringboardController@index'
-]);
-
-Route::get('springboard/create', [
-    'as' => 'backend.springboard.create',
-    'uses' => 'Auth\SpringboardController@create'
-]);
-
-Route::post('springboard/create', [
-    'as' => 'backend.springboard.store',
-    'uses' => 'Auth\SpringboardController@store'
-]);
-
-Route::get('springboard/{website}', [
-    'as' => 'backend.springboard.open',
-    'uses' => 'Auth\SpringboardController@open'
-]);
+Route::get('springboard', 'Auth\SpringboardController@index')->name('backend.springboard.index');
+Route::get('springboard/create', 'Auth\SpringboardController@create')->name('backend.springboard.create');
+Route::post('springboard/create', 'Auth\SpringboardController@store')->name('backend.springboard.store');
+Route::get('springboard/{website}', 'Auth\SpringboardController@open')->name('backend.springboard.open');

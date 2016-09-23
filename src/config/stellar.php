@@ -12,14 +12,28 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
-    | Path to Modules.
-    |--------------------------------------------------------------------------
-    |
-    | Define the path where you'd like to store your modules. Note that if you
-    | choose a path that's outside of your public directory, you will need to
-    | copy your module assets (CSS, images, etc.) to your public directory.
-    */
+     |--------------------------------------------------------------------------
+     | Backend URI
+     |--------------------------------------------------------------------------
+     |
+     | This value determines where the "backend section" of stellar is located.
+     | Beware that changing this value also changes the backend route names
+     | so when using backend routes it's best to use the `s_route` and
+     | `s_route_string` helper methods instead of the "native"
+     | `route` and `route_string` helper methods.
+     */
+
+    'backend-uri' => env('STELLAR_BACKEND_URI', 'cp'),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Path to Modules.
+     |--------------------------------------------------------------------------
+     |
+     | Define the path where you'd like to store your modules. Note that if you
+     | choose a path that's outside of your public directory, you will need to
+     | copy your module assets (CSS, images, etc.) to your public directory.
+     */
 
     'modules-path' => env('STELLAR_MODULES_PATH', app_path('Modules')),
 
@@ -45,34 +59,70 @@ return [
      | is primarily used by the Artisan module:make command.
      */
 
-    'modules-namespace' => env('STELLAR_MODULES_NAMESPACE', 'App\Modules\\'),
+    'modules-namespace' => env('STELLAR_MODULES_NAMESPACE', 'App\\Modules\\'),
 
     /*
      |--------------------------------------------------------------------------
-     | Theme path
+     | Theme path.
      |--------------------------------------------------------------------------
      |
      | TODO
      |
      */
 
-    'theme-path' => env('STELLAR_THEME_PATH', 'public/themes'),
-
-    'theme-active' => 'stellar',
+    'theme-path' => env('STELLAR_THEME_PATH', 'resources/themes'),
 
     /*
      |--------------------------------------------------------------------------
-     | Backend URI
+     | Currently activated theme.
      |--------------------------------------------------------------------------
      |
-     | This value determines where the "backend section" of stellar is located.
-     | Beware that changing this value also changes the backend route names
-     | so when using backend routes it's best to use the `s_route` and
-     | `s_route_string` helper methods instead of the "native"
-     | `route` and `route_string` helper methods.
+     | TODO
+     |
      */
 
-    'backend-uri' => env('STELLAR_BACKEND_URI', 'cp'),
+    'theme-active' => env('STELLAR_THEME_ACTIVE', 'stellar'),
+
+    /*
+     |--------------------------------------------------------------------------
+     | The default widget.
+     |--------------------------------------------------------------------------
+     |
+     | This is the default widget that gets included with every new page.
+     |
+     */
+
+    'studio-default-widget' => KraftHaus\Stellar\Studio\Widgets\DefaultWidget::class,
+
+    /*
+     |--------------------------------------------------------------------------
+     | Available studio widgets.
+     |--------------------------------------------------------------------------
+     |
+     | TODO
+     |
+     */
+
+    'studio-widgets' => [
+
+        'default-widget' => KraftHaus\Stellar\Studio\Widgets\DefaultWidget::class,
+
+    ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Available studio fields.
+     |--------------------------------------------------------------------------
+     |
+     | TODO
+     |
+     */
+
+    'studio-fields' => [
+
+        'text' => KraftHaus\Stellar\Studio\Fields\TextField::class,
+
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -91,11 +141,51 @@ return [
 
     ],
 
-    'admin-widgets' => [
+    /*
+     |--------------------------------------------------------------------------
+     | Available admin mappers.
+     |--------------------------------------------------------------------------
+     |
+     | TODO
+     |
+     */
 
-        'form' => KraftHaus\Stellar\Admin\Widgets\FormWidget::class,
-        'table' => KraftHaus\Stellar\Admin\Widgets\TableWidget::class,
+    'admin-mappers' => [
+
+        'form' => KraftHaus\Stellar\Admin\Mappers\FormMapper::class,
+        'list' => KraftHaus\Stellar\Admin\Mappers\ListMapper::class,
+        'scope' => KraftHaus\Stellar\Admin\Mappers\ScopeMapper::class,
+        'filter' => KraftHaus\Stellar\Admin\Mappers\FilterMapper::class,
+        'partial' => KraftHaus\Stellar\Admin\Mappers\PartialMapper::class,
 
     ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Available admin fields.
+     |--------------------------------------------------------------------------
+     |
+     | TODO
+     |
+     */
+
+    'admin-fields' => [
+
+        'date' => KraftHaus\Stellar\Admin\Fields\DateField::class,
+        'file' => KraftHaus\Stellar\Admin\Fields\FileField::class,
+        'text' => KraftHaus\Stellar\Admin\Fields\TextField::class,
+        'time' => KraftHaus\Stellar\Admin\Fields\TimeField::class,
+        'email' => KraftHaus\Stellar\Admin\Fields\EmailField::class,
+        'image' => KraftHaus\Stellar\Admin\Fields\ImageField::class,
+        'label' => KraftHaus\Stellar\Admin\Fields\LabelField::class,
+        'anchor' => KraftHaus\Stellar\Admin\Fields\AnchorField::class,
+        'number' => KraftHaus\Stellar\Admin\Fields\NumberField::class,
+        'select' => KraftHaus\Stellar\Admin\Fields\SelectField::class,
+        'boolean' => KraftHaus\Stellar\Admin\Fields\BooleanField::class,
+        'password' => KraftHaus\Stellar\Admin\Fields\PasswordField::class,
+        'textarea' => KraftHaus\Stellar\Admin\Fields\TextareaField::class,
+        'date-time' => KraftHaus\Stellar\Admin\Fields\DateTimeField::class,
+
+    ]
 
 ];

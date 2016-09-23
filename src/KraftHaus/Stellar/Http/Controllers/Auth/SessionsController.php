@@ -12,13 +12,14 @@ namespace KraftHaus\Stellar\Http\Controllers\Auth;
  */
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 class SessionsController extends Controller
 {
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -26,7 +27,7 @@ class SessionsController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -39,5 +40,17 @@ class SessionsController extends Controller
         return redirect()->back()->withInput()->withErrors([
             'email' => 'These credentials do not match our records.',
         ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function destroy()
+    {
+        auth()->logout();
+
+        session()->flush();
+
+        return redirect()->guest(config('stellar.backend-uri'));
     }
 }

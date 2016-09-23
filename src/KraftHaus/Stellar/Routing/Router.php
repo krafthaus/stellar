@@ -28,7 +28,13 @@ class Router extends \Illuminate\Routing\Router
 
         array_unshift($middleware, 'web');
 
-        $attributes = array_merge($attributes, compact('prefix', 'middleware'));
+        // Hacky way to fix Laravel-Debugbar middleware errors.
+        $middleware = array_combine($middleware, $middleware);
+
+        $attributes = array_merge($attributes, [
+            'prefix' => $prefix,
+            'middleware' => $middleware
+        ]);
 
         $this->group(array_filter($attributes), $callback);
     }

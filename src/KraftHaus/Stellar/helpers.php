@@ -10,14 +10,27 @@
  */
 
 use Illuminate\Support\HtmlString;
+use KraftHaus\Stellar\Support\Context;
 use KraftHaus\Stellar\Support\Facades\Asset;
+use KraftHaus\Stellar\Support\Facades\Theme;
+
+if (! function_exists('context')) {
+
+    /**
+     * @return Context
+     */
+    function context()
+    {
+        return app('context');
+    }
+}
 
 if (! function_exists('css_assets')) {
 
     /**
      * @param  string  $namespace
      *
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      */
     function css_assets($namespace)
     {
@@ -34,7 +47,7 @@ if (! function_exists('js_assets')) {
     /**
      * @param  string  $namespace
      *
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      */
     function js_assets($namespace)
     {
@@ -43,5 +56,22 @@ if (! function_exists('js_assets')) {
         if ($namespace) {
             return new HtmlString($namespace->js());
         }
+    }
+}
+
+if (! function_exists('theme')) {
+
+    /**
+     * @param  string  $path
+     *
+     * @return mixed
+     */
+    function theme($path = null)
+    {
+        if ($path) {
+            return Theme::view($path);
+        }
+
+        return app('theme');
     }
 }

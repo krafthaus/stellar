@@ -1,0 +1,10 @@
+{
+  "name": "krafthaus/stellar",
+  "dependencies": {
+    "jquery": "2.2.*",
+    "bootstrap": "4.0.0-alpha.4"
+  },
+  "resolutions": {
+    "jquery": "2.2.*"
+  }
+}

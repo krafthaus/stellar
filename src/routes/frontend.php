@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-Route::get('{page}', [
-    'as' => 'stellar.pages.show',
-    'uses' => 'FrontendController@index'
-])->where('page', '^([a-zA-Z0-9\/_\-\.]*)$');
+Route::get('{page}', 'FrontendController@index')
+    ->name('stellar.pages.show')
+    ->where('page', '^([a-zA-Z0-9\/_\-\.]*)$');

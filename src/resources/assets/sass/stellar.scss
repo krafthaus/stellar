@@ -1,2 +1,5 @@
-@import "components/sidebar";
-@import "components/main";
+@import 'settings';
+@import 'vendor';
+
+@import "components/header";
+@import "components/page-title";

@@ -21,9 +21,18 @@ class FrontendController
         $website = Frontend::website();
         $page = Frontend::page();
 
-        return view('page')->with([
+        // Somehow a page is created without a root widget
+        // so let's be a good samaritan and create one.
+        if (! $page->hasWidgets()) {
+            $page->createRootWidget();
+        }
+
+        $widgets = $page->widgets->toHierarchy();
+
+        return theme('page')->with([
             'website' => $website,
             'page' => $page,
+            'widgets' => $widgets
         ]);
     }
 }

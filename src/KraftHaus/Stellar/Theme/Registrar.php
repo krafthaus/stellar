@@ -11,6 +11,7 @@ namespace KraftHaus\Stellar\Theme;
  * file that was distributed with this source code.
  */
 
+use InvalidArgumentException;
 use Illuminate\Http\Response;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
@@ -60,6 +61,14 @@ class Registrar
         $this->files = $files;
         $this->config = $config;
         $this->viewFactory = $viewFactory;
+    }
+
+    /**
+     * @return $this
+     */
+    public function instance()
+    {
+        return $this;
     }
 
     /**
@@ -213,7 +222,7 @@ class Registrar
             }
         }
 
-        return false;
+        throw new InvalidArgumentException("Theme view [{$view}] not found.");
     }
 
     /**
@@ -226,7 +235,7 @@ class Registrar
      */
     public function view($view, $data = array())
     {
-        if (!is_null($this->layout)) {
+        if (! is_null($this->layout)) {
             $data['theme_layout'] = $this->getLayout();
         }
 
@@ -281,7 +290,7 @@ class Registrar
      */
     public function getJsonPath($theme)
     {
-        return $this->getThemePath($theme).'/theme.json';
+        return $this->getThemePath($theme) . 'manifest.json';
     }
 
     /**
@@ -297,7 +306,7 @@ class Registrar
 
         $default = [];
 
-        if (!$this->exists($theme)) {
+        if (! $this->exists($theme)) {
             return $default;
         }
 
@@ -403,7 +412,8 @@ class Registrar
     /**
      * Get the specified themes View namespace.
      *
-     * @param  string  $key
+     * @param  string       $key
+     * @param  string|null  $theme
      *
      * @return string
      */
@@ -429,7 +439,8 @@ class Registrar
 
         if ($viewSegments[0] == 'modules') {
             $module = $viewSegments[1];
-            $view   = implode('.', array_slice($viewSegments, 2));
+
+            $view = implode('.', array_slice($viewSegments, 2));
 
             return "{$module}::{$view}";
         }

@@ -91,6 +91,15 @@ class Registrar
     }
 
     /**
+     * @param  string  $slug
+     * @return mixed
+     */
+    public function find(string $slug)
+    {
+        return $this->where('slug', $slug);
+    }
+
+    /**
      * Sort modules by a given key in ascending order.
      *
      * @param  string  $key
@@ -215,7 +224,7 @@ class Registrar
      */
     public function enable($slug)
     {
-        $this->set($slug.'::enabled', true);
+        $this->set($slug . '::enabled', true);
     }
 
     /**
@@ -225,7 +234,7 @@ class Registrar
      */
     public function disable($slug)
     {
-        $this->set($slug.'::enabled', false);
+        $this->set($slug . '::enabled', false);
     }
 
     /**
@@ -253,10 +262,10 @@ class Registrar
         if (isset($properties['autoload'])) {
             $namespace = $this->resolveNamespace($properties);
 
-            $path = $this->getPath()."/{$namespace}/";
+            $path = $this->getPath() . "/{$namespace}/";
 
             foreach ($properties['autoload'] as $file) {
-                require $path.$file;
+                require $path . $file;
             }
         }
     }
@@ -430,6 +439,6 @@ class Registrar
      */
     protected function getManifestPath($slug)
     {
-        return $this->getModulePath($slug).'/manifest.json';
+        return $this->getModulePath($slug) . '/manifest.json';
     }
 }

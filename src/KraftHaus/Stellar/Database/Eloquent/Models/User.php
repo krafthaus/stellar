@@ -42,6 +42,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(Website::class);
     }
 
+    public function hasWebsite($website)
+    {
+        if ($website instanceof Model) {
+            $website = $website->getKey();
+        }
+
+        return $this->whereHas('websites', function ($query) use ($website) {
+            $query->where('id', $website);
+        })->count();
+    }
+
     /**
      * Create the new super user. (there can only be one of this).
      *

@@ -39,7 +39,7 @@ class SpringboardController extends Controller
         }
 
         // ... Saul Goodman
-        return view('stellar.screens.springboard.show')->with(compact('websites'));
+        return theme('screens.springboard.show')->with(compact('websites'));
     }
 
     /**
@@ -58,7 +58,9 @@ class SpringboardController extends Controller
     public function store(SpringboardRequest $request)
     {
         $website = Website::create($request->all());
+
         $website->users()->attach(Auth::user());
+
         $website->save();
 
         return $this->open($website);

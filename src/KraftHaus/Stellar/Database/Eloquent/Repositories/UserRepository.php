@@ -11,16 +11,16 @@ namespace KraftHaus\Stellar\Database\Eloquent\Repositories;
  * file that was distributed with this source code.
  */
 
-use KraftHaus\Stellar\Database\Eloquent\Repository;
+use Prettus\Repository\Eloquent\BaseRepository;
 use KraftHaus\Stellar\Database\Eloquent\Models\User;
 
-class UserRepository extends Repository
+class UserRepository extends BaseRepository
 {
 
     /**
      * Specify the model class name.
      *
-     * @return mixed
+     * @return string
      */
     public function model()
     {

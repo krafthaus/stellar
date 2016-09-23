@@ -12,6 +12,7 @@ namespace KraftHaus\Stellar\Providers;
  */
 
 use Illuminate\Routing\Router;
+use KraftHaus\Stellar\Support\Facades\Frontend;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -23,29 +24,46 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'KraftHaus\Stellar\Http\Controllers';
 
+    protected $resourcePath;
+
+    /**
+     * @param  Router  $router
+     */
     public function map(Router $router)
     {
-        $resourcePath = __DIR__.'/../../..';
+        $this->resourcePath = __DIR__ . '/../../..';
 
-        $router->backend(function () use ($resourcePath) {
-            require $resourcePath.'/routes/guarded.php';
+        $this->mapProtectedBackendRoutes($router);
+
+        $this->mapGuestBackendRoutes($router);
+
+        if (Frontend::page()) {
+            $this->mapFrontendRoutes($router);
+        }
+    }
+
+    protected function mapProtectedBackendRoutes(Router $router)
+    {
+        $router->backend(function () {
+            require $this->resourcePath . '/routes/guarded.php';
         }, ['namespace' => $this->namespace]);
+    }
 
-        $prefix = config('stellar.backend-uri');
-
-        $router->group([
-            'middleware' => ['web'],
-            'namespace'  => $this->namespace,
-            'prefix'     => $prefix,
-        ], function () use ($resourcePath) {
-            require $resourcePath.'/routes/guest.php';
-        });
-
+    protected function mapGuestBackendRoutes(Router $router)
+    {
         $router->group([
             'middleware' => ['web'],
             'namespace' => $this->namespace,
-        ], function () use ($resourcePath) {
-            require $resourcePath.'/routes/frontend.php';
+            'prefix' => config('stellar.backend-uri'),
+        ], function () {
+            require $this->resourcePath . '/routes/guest.php';
+        });
+    }
+
+    protected function mapFrontendRoutes(Router $router)
+    {
+        $router->group(['middleware' => ['web'], 'namespace' => $this->namespace], function () {
+            require $this->resourcePath . '/routes/frontend.php';
         });
     }
 }

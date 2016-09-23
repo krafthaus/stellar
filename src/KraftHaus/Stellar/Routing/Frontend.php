@@ -11,7 +11,6 @@ namespace KraftHaus\Stellar\Routing;
  * file that was distributed with this source code.
  */
 
-use KraftHaus\Stellar\Support\Facades\Context;
 use KraftHaus\Stellar\Database\Eloquent\Models\Page;
 use KraftHaus\Stellar\Database\Eloquent\Models\Website;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -33,8 +32,14 @@ class Frontend
 
     public function __construct()
     {
-        if (Context::isFrontend() && ! app()->runningInConsole()) {
-            $this->website = $this->discoverWebsite();
+        if (context()->isFrontend() && ! app()->runningInConsole()) {
+            if ($website = $this->discoverWebsite()) {
+                // Set the active theme.
+                theme()->setActive($website->theme);
+
+                $this->website = $website;
+            }
+
             $this->page = $this->discoverPage();
         }
     }
@@ -53,6 +58,9 @@ class Frontend
         try {
             // First try to find the exact match.
             return Website::activated()
+                ->select([
+                    'id', 'domain', 'theme'
+                ])
                 ->byDomain($url)
                 ->sorted()
                 ->firstOrFail();
@@ -61,7 +69,12 @@ class Frontend
             // This is done by sorting all the domains by length (sortest first) and looping
             // over those results until we find the a new `exact` match. This will be our
             // current domain. Nothing is returned when nothing is ffound.
-            $websites = Website::activated()->sorted()->get();
+            $websites = Website::activated()
+                ->select([
+                    'id', 'domain', 'theme'
+                ])
+                ->sorted()
+                ->get();
 
             foreach ($websites as $website) {
                 if ((bool) strstr(str_finish($url, '/'), str_finish($website->domain, '/')) === true) {
@@ -73,6 +86,11 @@ class Frontend
         abort(404);
     }
 
+    /**
+     * Get the website instance.
+     *
+     * @return Website
+     */
     public function website()
     {
         return $this->website;
@@ -81,7 +99,6 @@ class Frontend
     /**
      * Discover the current page.
      *
-     * @return Page
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
@@ -89,14 +106,23 @@ class Frontend
     {
         try {
             return $this->website->pages()
+                ->select([
+                    'id'
+                ])
                 ->activated()
                 ->bySlug($this->getSlug())
+                ->with('widgets', 'widgets.page')
                 ->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            abort(404);
+            return null;
         }
     }
 
+    /**
+     * Get the page instance.
+     *
+     * @return Page|null
+     */
     public function page()
     {
         return $this->page;

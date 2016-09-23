@@ -39,7 +39,6 @@ class AssetServiceProvider extends ServiceProvider
         Facade::make('backend.js');
 
         Facade::get('backend.css')
-            ->add('//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.4/css/bootstrap.min.css')
             ->add(asset('css/stellar.css'));
 
         Facade::get('backend.js')

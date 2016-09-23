@@ -17,5 +17,5 @@ elixir(mix => {
     const __root = __dirname + '/../../../../public';
 
     mix.sass('stellar.scss').copy('public/css/stellar.css', __root + '/css/stellar.css');
-    mix.rollup('stellar.js').copy('public/js/stellar.js', __root + '/js/stellar.js');
+    mix.webpack('stellar.js').copy('public/js/stellar.js', __root + '/js/stellar.js');
 });
