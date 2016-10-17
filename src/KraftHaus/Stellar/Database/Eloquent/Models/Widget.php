@@ -14,7 +14,6 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
 use KraftHaus\Forrest\Node;
 use InvalidArgumentException;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class Widget extends Node
 {
