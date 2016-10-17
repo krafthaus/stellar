@@ -74,6 +74,18 @@ return [
 
     /*
      |--------------------------------------------------------------------------
+     | Theme path.
+     |--------------------------------------------------------------------------
+     |
+     | The public base path to the assets of a theme. This will look something.
+     | like this /public/themes/{theme-name}/my-awesome-asset.css
+     |
+     */
+
+    'theme-asset-path' => env('STELLAR_THEME_ASSET_PATH', 'themes'),
+
+    /*
+     |--------------------------------------------------------------------------
      | Currently activated theme.
      |--------------------------------------------------------------------------
      |

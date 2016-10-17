@@ -390,9 +390,9 @@ class Registrar
             $asset = $segments[0];
         }
 
-        return url($this->config->get('themes.paths.base') . '/'
-            . ($theme ?: $this->getActive()) . '/assets/'
-            . $asset);
+        $assetPath = trim($this->config->get('stellar.theme-asset-path'), '/');
+
+        return url($assetPath . '/' . ($theme ?: $this->getActive()) . '/' . $asset);
     }
 
     /**
