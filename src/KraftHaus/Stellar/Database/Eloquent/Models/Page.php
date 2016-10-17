@@ -13,14 +13,12 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
-use KraftHaus\Stellar\Database\Eloquent\Traits\Metable;
 use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Page extends Model
 {
 
     use Activatable;
-    use Metable;
 
     /**
      * Scope the query by a certain slug.

@@ -14,6 +14,7 @@ namespace KraftHaus\Stellar\Theme;
 use InvalidArgumentException;
 use Illuminate\Http\Response;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\View\View;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Database\Eloquent\Collection;
@@ -73,8 +74,6 @@ class Registrar
 
     /**
      * Register custom namespaces for all themes.
-     *
-     * @return null
      */
     public function register()
     {
@@ -87,8 +86,6 @@ class Registrar
      * Register custom namespaces for specified theme.
      *
      * @param  string  $theme
-     *
-     * @return null
      */
     public function registerNamespace($theme)
     {
@@ -231,7 +228,7 @@ class Registrar
      * @param  string  $view
      * @param  array   $data
      *
-     * @return ViewFactory
+     * @return View
      */
     public function view($view, $data = array())
     {
@@ -264,7 +261,7 @@ class Registrar
      *
      * @return Response
      */
-    public function response($view, $data = array(), $status = 200, array $headers = array())
+    public function response($view, $data = [], $status = 200, array $headers = [])
     {
         return response($this->view($view, $data), $status, $headers);
     }
@@ -385,7 +382,7 @@ class Registrar
     public function asset($asset)
     {
         $segments = explode('::', $asset);
-        $theme    = null;
+        $theme = null;
 
         if (count($segments) == 2) {
             list($theme, $asset) = $segments;

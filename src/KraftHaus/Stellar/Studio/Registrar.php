@@ -29,46 +29,22 @@ class Registrar
         ];
     }
 
-    /**
-     * Register a new field.
-     *
-     * @param  array|string  $name
-     * @param  null|string   $namespace
-     *
-     * @return $this|Registrar
-     */
-    public function field($name, $namespace = null)
+    public function __call($method, $arguments = [])
     {
-        if (is_array($name)) {
-            foreach ($name as $key => $namespace) {
-                $this->register('field', $key, $namespace);
-            }
-
-            return $this;
+        if (! in_array($method, ['field', 'widget'])) {
+            throw new \BadMethodCallException;
         }
 
-        return $this->register('field', $name, $namespace);
-    }
+        $name = $arguments[0];
+        $namespace = isset($arguments[1]) ? $arguments[1] : null;
 
-    /**
-     * Register a new widget.
-     *
-     * @param  string|array  $name
-     * @param  null|string   $namespace
-     *
-     * @return $this|Registrar
-     */
-    public function widget($name, $namespace = null)
-    {
-        if (is_array($name)) {
-            foreach ($name as $key => $namespace) {
-                $this->register('widget', $key, $namespace);
-            }
-
-            return $this;
+        if (! is_array($name)) {
+            return $this->register($method, $name, $namespace);
         }
 
-        return $this->register('widget', $name, $namespace);
+        foreach ($name as $key => $namespace) {
+            $this->register($method, $key, $namespace);
+        }
     }
 
     /**
@@ -83,6 +59,8 @@ class Registrar
     public function register($type, $name, $namespace)
     {
         $this->types[$type]->put($name, $namespace);
+
+        return $this;
     }
 
     /**

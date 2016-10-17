@@ -23,17 +23,17 @@ abstract class License
      */
     public static function validate($key = null)
     {
-        if ($key === null) {
+        if (! $key) {
             $key = env('STELLAR_KEY');
         }
 
         // If the key is still not provided, then there's no way for
         // us to validate the package so it instantly invalid
-        if ($key === null) {
+        if (! $key) {
             return false;
         }
 
-        return $key == 'yes';
+        return $key == 'demo';
     }
 
     /**

@@ -91,7 +91,7 @@ abstract class Widget
             }
 
             // Apparently we've found an existing field/value combination
-            // so let's call the `setVAlue()` method on that field.
+            // so let's call the `setValue()` method on that field.
             $this->fields[$key]->setValue($value);
         });
     }

@@ -82,7 +82,6 @@ class StellarServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(MenuServiceProvider::class);
-        $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
     }
 
     /**
