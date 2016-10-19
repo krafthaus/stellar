@@ -11,8 +11,8 @@ namespace KraftHaus\Stellar\Providers;
  * file that was distributed with this source code.
  */
 
-use KraftHaus\Stellar\Routing\Router;
-use KraftHaus\Stellar\Routing\Frontend;
+use KraftHaus\Stellar\Http\Routing\Router;
+use KraftHaus\Stellar\Http\Routing\Frontend;
 
 class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
 {

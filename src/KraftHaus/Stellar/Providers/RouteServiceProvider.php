@@ -11,7 +11,7 @@ namespace KraftHaus\Stellar\Providers;
  * file that was distributed with this source code.
  */
 
-use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use KraftHaus\Stellar\Support\Facades\Frontend;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,46 +24,46 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'KraftHaus\Stellar\Http\Controllers';
 
-    protected $resourcePath;
-
     /**
-     * @param  Router  $router
+     * The path to the route files.
+     * @var string
      */
-    public function map(Router $router)
+    protected $path;
+
+    public function map()
     {
-        $this->resourcePath = __DIR__ . '/../../..';
+        $this->path = __DIR__ . '/../../../routes';
 
-        $this->mapProtectedBackendRoutes($router);
-
-        $this->mapGuestBackendRoutes($router);
+        $this->mapProtectedBackendRoutes();
+        $this->mapGuestBackendRoutes();
 
         if (Frontend::page()) {
-            $this->mapFrontendRoutes($router);
+            $this->mapFrontendRoutes();
         }
     }
 
-    protected function mapProtectedBackendRoutes(Router $router)
+    protected function mapProtectedBackendRoutes()
     {
-        $router->backend(function () {
-            require $this->resourcePath . '/routes/guarded.php';
+        Route::backend(function () {
+            require $this->path . '/guarded.php';
         }, ['namespace' => $this->namespace]);
     }
 
-    protected function mapGuestBackendRoutes(Router $router)
+    protected function mapGuestBackendRoutes()
     {
-        $router->group([
+        Route::group([
             'middleware' => ['web'],
             'namespace' => $this->namespace,
             'prefix' => config('stellar.backend-uri'),
         ], function () {
-            require $this->resourcePath . '/routes/guest.php';
+            require $this->path . '/guest.php';
         });
     }
 
-    protected function mapFrontendRoutes(Router $router)
+    protected function mapFrontendRoutes()
     {
-        $router->group(['middleware' => ['web'], 'namespace' => $this->namespace], function () {
-            require $this->resourcePath . '/routes/frontend.php';
+        Route::group(['middleware' => ['web'], 'namespace' => $this->namespace], function () {
+            require $this->path . '/frontend.php';
         });
     }
 }

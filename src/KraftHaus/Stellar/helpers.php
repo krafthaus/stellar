@@ -75,3 +75,16 @@ if (! function_exists('theme')) {
         return app('theme');
     }
 }
+
+if (! function_exists('theme_asset')) {
+
+    /**
+     * @param  string  $path
+     *
+     * @return mixed
+     */
+    function theme_asset($path)
+    {
+        return Theme::asset($path);
+    }
+}

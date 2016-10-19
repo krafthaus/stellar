@@ -1,6 +1,6 @@
 <?php
 
-namespace KraftHaus\Stellar\Routing;
+namespace KraftHaus\Stellar\Http\Routing;
 
 /*
  * This file is part of the Stellar package.
