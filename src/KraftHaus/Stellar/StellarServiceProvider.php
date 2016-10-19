@@ -15,9 +15,9 @@ use Webpatser\Uuid\Uuid;
 use Spatie\Menu\Laravel\MenuFacade;
 use KraftHaus\Stellar\Admin\Factory;
 use KraftHaus\Stellar\Support\Context;
-use KraftHaus\Stellar\Routing\Frontend;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Menu\Laravel\MenuServiceProvider;
+use KraftHaus\Stellar\Http\Routing\Frontend;
 use KraftHaus\Stellar\Providers\FlashServiceProvider;
 use KraftHaus\Stellar\Providers\RouteServiceProvider;
 use KraftHaus\Stellar\Providers\ThemeServiceProvider;
@@ -91,7 +91,7 @@ class StellarServiceProvider extends ServiceProvider
     {
         $this->app->singleton('frontend', Frontend::class);
         $this->app->singleton('context', Context::class);
-        $this->app->singleton('admin', Factory::class);
+//        $this->app->singleton('admin', Factory::class);
         $this->app->alias('Menu', MenuFacade::class);
         $this->app->alias('Uuid', Uuid::class);
     }

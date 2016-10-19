@@ -45,9 +45,7 @@ class IndexController extends Controller
     {
         $users = $user->paginate();
 
-        return Admin::make(UserEntity::class, 'index')
-            ->with(compact('users'))
-            ->render();
+        return $users;
     }
 
     /**
@@ -87,8 +85,7 @@ class IndexController extends Controller
     {
         $websites = $this->websites->all();
 
-        return Admin::make(UserEntity::class, 'edit')
-            ->with(compact('websites', 'user'));
+        return $user;
     }
 
     /**
