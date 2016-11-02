@@ -91,7 +91,6 @@ class StellarServiceProvider extends ServiceProvider
     {
         $this->app->singleton('frontend', Frontend::class);
         $this->app->singleton('context', Context::class);
-//        $this->app->singleton('admin', Factory::class);
         $this->app->alias('Menu', MenuFacade::class);
         $this->app->alias('Uuid', Uuid::class);
     }

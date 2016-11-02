@@ -57,7 +57,7 @@ trait Activatable
      *
      * @return string
      */
-    protected function getActivatedColumn()
+    protected function getActivatedColumn(): string
     {
         return property_exists($this, 'activatedColumn')
             ? $this->activatedColumn

@@ -28,7 +28,7 @@ class WebsiteRepository extends BaseRepository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return Website::class;
     }

@@ -42,7 +42,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(Website::class);
     }
 
-    public function hasWebsite($website)
+    /**
+     * @param  string|Model  $website
+     *
+     * @return bool
+     */
+    public function hasWebsite($website): bool
     {
         if ($website instanceof Model) {
             $website = $website->getKey();
@@ -58,7 +63,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return Model
      */
-    public static function createSuperUser()
+    public static function createSuperUser(): User
     {
         return static::create([
             'name' => 'Super User',

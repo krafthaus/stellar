@@ -27,7 +27,7 @@ class Handler
      *
      * @param  string  $message
      */
-    public function info($message)
+    public function info(string $message)
     {
         $this->message($message, 'info');
     }
@@ -37,7 +37,7 @@ class Handler
      *
      * @param  string  $message
      */
-    public function success($message)
+    public function success(string $message)
     {
         $this->message($message, 'success');
     }
@@ -47,7 +47,7 @@ class Handler
      *
      * @param  string  $message
      */
-    public function warning($message)
+    public function warning(string $message)
     {
         $this->message($message, 'warning');
     }
@@ -57,7 +57,7 @@ class Handler
      *
      * @param  string  $message
      */
-    public function error($message)
+    public function error(string $message)
     {
         $this->message($message, 'error');
     }
@@ -68,7 +68,7 @@ class Handler
      * @param  string  $message
      * @param  string  $level
      */
-    public function message($message, $level)
+    public function message(string $message, string $level)
     {
         $this->session->flash('stellar.flash.message', $message);
         $this->session->flash('stellar.flash.level', $level);

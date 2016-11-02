@@ -27,7 +27,7 @@ class Dependencies
     /**
      * @param  array  $dependencies
      */
-    public function __construct($dependencies = [])
+    public function __construct(array $dependencies = [])
     {
         $this->roots = array_keys($dependencies);
 
@@ -59,7 +59,7 @@ class Dependencies
      *
      * @return array
      */
-    public function sort()
+    public function sort(): array
     {
         $nodes = $this->nodes;
 
@@ -111,7 +111,7 @@ class Dependencies
      *
      * @return array
      */
-    protected function getRootNodes(array $nodes)
+    protected function getRootNodes(array $nodes): array
     {
         $roots = [];
 
@@ -128,9 +128,10 @@ class Dependencies
      * Parses a list of dependencies into an array of dependency pairs.
      *
      * @param  array  $list
+     *
      * @return array
      */
-    protected function parseDependencyList(array $list = [])
+    protected function parseDependencyList(array $list = []): array
     {
         $parsed = [];
 

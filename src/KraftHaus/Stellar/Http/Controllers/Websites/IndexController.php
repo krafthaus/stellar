@@ -40,8 +40,6 @@ class IndexController extends Controller
     {
         $websites = $this->websites->paginate();
 
-        return view('gaaf');
-
         return theme('screens.websites.index.index')->with([
             'websites' => $websites
         ]);

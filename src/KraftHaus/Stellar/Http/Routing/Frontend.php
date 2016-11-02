@@ -51,7 +51,7 @@ class Frontend
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function discoverWebsite()
+    public function discoverWebsite(): Website
     {
         $url = $this->getStrippedUrl();
 
@@ -91,7 +91,7 @@ class Frontend
      *
      * @return Website
      */
-    public function website()
+    public function website(): Website
     {
         return $this->website;
     }
@@ -133,7 +133,7 @@ class Frontend
      *
      * @return string
      */
-    protected function getStrippedUrl()
+    protected function getStrippedUrl(): string
     {
         return str_replace(parse_url($url = request()->url(), PHP_URL_SCHEME).'://', '', $url);
     }
@@ -143,7 +143,7 @@ class Frontend
      *
      * @return string
      */
-    protected function getSlug()
+    protected function getSlug(): string
     {
         return trim(str_replace($this->website->domain, '', $this->getStrippedUrl()), '/') ?: '/';
     }

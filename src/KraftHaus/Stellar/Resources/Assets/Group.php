@@ -45,9 +45,9 @@ class Group
      * @param  string|array  $assets
      * @param  null|string   $name
      *
-     * @return $this
+     * @return Group
      */
-    public function add($assets, $name = null)
+    public function add($assets, string $name = null): Group
     {
         if (is_array($assets)) {
             foreach ($assets as $asset) {
@@ -65,9 +65,9 @@ class Group
      *
      * @param  string  $dependency
      *
-     * @return $this
+     * @return Group
      */
-    public function dependsOn($dependency)
+    public function dependsOn(string $dependency): Group
     {
         $collection = $this->collection->get($this->lastAddedType);
 
@@ -90,7 +90,7 @@ class Group
      *
      * @return string
      */
-    public function css()
+    public function css(): string
     {
         $output = '';
 
@@ -108,7 +108,7 @@ class Group
      *
      * @return string
      */
-    public function js()
+    public function js(): string
     {
         $output = '';
 
@@ -128,7 +128,7 @@ class Group
      *
      * @return bool
      */
-    protected function isAsset($asset)
+    protected function isAsset(string $asset): bool
     {
         return (bool) preg_match('/.\.(css|js)$/i', $asset);
     }
@@ -140,7 +140,7 @@ class Group
      *
      * @return bool
      */
-    protected function isCss($asset)
+    protected function isCss(string $asset): bool
     {
         return (bool) preg_match('/.\.css$/i', $asset);
     }
@@ -151,9 +151,9 @@ class Group
      * @param  string       $asset
      * @param  null|string  $name
      *
-     * @return $this
+     * @return Group
      */
-    protected function addAsset($asset, $name = null)
+    protected function addAsset(string $asset, $name = null): Group
     {
         $type = $this->isCss($asset) ? 'css' : 'js';
 
@@ -182,7 +182,7 @@ class Group
      *
      * @return array
      */
-    protected function sortDependencies($assets, $type)
+    protected function sortDependencies(array $assets, string $type): array
     {
         $list = [];
 
@@ -207,7 +207,7 @@ class Group
      *
      * @return int|string
      */
-    protected function getNamespacedAsset($namespace, $type)
+    protected function getNamespacedAsset(string $namespace, string $type)
     {
         $collection = $this->collection->get($type);
 

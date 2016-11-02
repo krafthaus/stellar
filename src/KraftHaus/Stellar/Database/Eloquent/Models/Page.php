@@ -13,6 +13,7 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Page extends Model
@@ -32,9 +33,9 @@ class Page extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function widgets()
+    public function widgets(): HasMany
     {
         return $this->hasMany(Widget::class);
     }
@@ -44,7 +45,7 @@ class Page extends Model
      *
      * @return bool
      */
-    public function hasWidgets()
+    public function hasWidgets(): bool
     {
         return ! $this->widgets->isEmpty();
     }
@@ -54,7 +55,7 @@ class Page extends Model
      *
      * @return Widget
      */
-    public function createRootWidget()
+    public function createRootWidget(): Widget
     {
         // Create a new root widget instance.
         $widget = new Widget([
@@ -64,5 +65,17 @@ class Page extends Model
 
         // Save the widget.
         return $this->widgets()->save($widget);
+    }
+
+    public function duplicate()
+    {
+        $original = $this;
+
+        $new = $original->replicate();
+        $new->push();
+
+        $original->widgets()->duplicate();
+
+        return $new;
     }
 }

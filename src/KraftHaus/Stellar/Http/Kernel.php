@@ -14,6 +14,8 @@ namespace KraftHaus\Stellar\Http;
 trait Kernel
 {
 
+    protected $router;
+
     /**
      * Get the route dispatcher callback.
      *
@@ -21,7 +23,7 @@ trait Kernel
      */
     protected function dispatchToRouter()
     {
-        $this->router = $this->app['router'];
+        $this->router = app('router');
 
         $this->registerMiddlewareGroups();
         $this->registerMiddleware();

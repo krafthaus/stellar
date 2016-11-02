@@ -56,7 +56,7 @@ class Registrar
      *
      * @return Collection
      */
-    public function all()
+    public function all(): Collection
     {
         return $this->getCache()->sortBy('order');
     }
@@ -66,11 +66,11 @@ class Registrar
      *
      * @return Collection
      */
-    public function slugs()
+    public function slugs(): Collection
     {
         $slugs = collect();
 
-        $this->all()->each(function ($item) use ($slugs) {
+        $this->all()->each(function (string $item) use ($slugs) {
             $slugs->push($item['slug']);
         });
 
@@ -85,7 +85,7 @@ class Registrar
      *
      * @return Collection
      */
-    public function where(string $key, $value)
+    public function where(string $key, $value): Collection
     {
         return $this->all()->where($key, $value);
     }
@@ -107,7 +107,7 @@ class Registrar
      *
      * @return Collection
      */
-    public function sortBy($key, $descending = false)
+    public function sortBy(string $key, bool $descending = false): Collection
     {
         return $this->all()->sortBy($key, SORT_REGULAR, $descending);
     }
@@ -119,7 +119,7 @@ class Registrar
      *
      * @return bool
      */
-    public function exists($slug)
+    public function exists(string $slug): bool
     {
         return $this->slugs()->contains(strtolower($slug));
     }
@@ -129,7 +129,7 @@ class Registrar
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->all()->count();
     }
@@ -142,7 +142,7 @@ class Registrar
      *
      * @return mixed
      */
-    public function get($property, $default = null)
+    public function get(string $property, $default = null)
     {
         list($slug, $key) = explode('::', $property);
 
@@ -157,7 +157,7 @@ class Registrar
      *
      * @return bool
      */
-    public function set($property, $value)
+    public function set(string $property, $value)
     {
         list($slug, $key) = explode('::', $property);
 
@@ -178,7 +178,7 @@ class Registrar
      *
      * @return Collection
      */
-    public function enabled()
+    public function enabled(): Collection
     {
         return $this->all()->where('enabled', true);
     }
@@ -188,7 +188,7 @@ class Registrar
      *
      * @return Collection
      */
-    public function disabled()
+    public function disabled(): Collection
     {
         return $this->all()->where('enabled', false);
     }
@@ -200,7 +200,7 @@ class Registrar
      *
      * @return bool
      */
-    public function isEnabled($slug)
+    public function isEnabled(string $slug): bool
     {
         return $this->where('slug', $slug)->first()['enabled'] === true;
     }
@@ -212,7 +212,7 @@ class Registrar
      *
      * @return bool
      */
-    public function isDisabled($slug)
+    public function isDisabled(string $slug): bool
     {
         return ! $this->isEnabled($slug);
     }
@@ -222,7 +222,7 @@ class Registrar
      *
      * @param  string  $slug
      */
-    public function enable($slug)
+    public function enable(string $slug)
     {
         $this->set($slug . '::enabled', true);
     }
@@ -232,7 +232,7 @@ class Registrar
      *
      * @param  string  $slug
      */
-    public function disable($slug)
+    public function disable(string $slug)
     {
         $this->set($slug . '::enabled', false);
     }
@@ -277,7 +277,7 @@ class Registrar
      *
      * @return string
      */
-    protected function resolveNamespace(array $properties)
+    protected function resolveNamespace(array $properties): string
     {
         return isset($properties['namespace'])
             ? $properties['namespace']
@@ -292,7 +292,7 @@ class Registrar
      * @return Collection
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function getManifest($slug)
+    protected function getManifest(string $slug): Collection
     {
         if ($slug) {
             $module = studly_case($slug);
@@ -313,7 +313,7 @@ class Registrar
      * @return Collection
      * @throws InvalidArgumentException
      */
-    protected function getBasenames()
+    protected function getBasenames(): Collection
     {
         $path = $this->getPath();
 
@@ -333,7 +333,7 @@ class Registrar
      *
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return config('stellar.modules-path');
     }
@@ -343,7 +343,7 @@ class Registrar
      *
      * @return string
      */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return rtrim(config('stellar.modules-namespace'), '/\\');
     }
@@ -354,7 +354,7 @@ class Registrar
      * @return Collection
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function getCache()
+    protected function getCache(): Collection
     {
         $path = $this->getCachePath();
 
@@ -411,7 +411,7 @@ class Registrar
      *
      * @return string
      */
-    protected function getCachePath()
+    protected function getCachePath(): string
     {
         return storage_path('app/stellar/modules.json');
     }
@@ -423,7 +423,7 @@ class Registrar
      *
      * @return string
      */
-    protected function getModulePath($slug)
+    protected function getModulePath(string $slug): string
     {
         $module = studly_case($slug);
 
@@ -437,7 +437,7 @@ class Registrar
      *
      * @return string
      */
-    protected function getManifestPath($slug)
+    protected function getManifestPath(string $slug): string
     {
         return $this->getModulePath($slug) . '/manifest.json';
     }

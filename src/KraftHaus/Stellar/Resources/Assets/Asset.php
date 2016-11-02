@@ -38,7 +38,7 @@ class Asset
      *
      * @return Group
      */
-    public function make($namespace, $callback = null)
+    public function make($namespace, $callback = null): Group
     {
         $group = new Group;
 

@@ -23,7 +23,7 @@ class ResourceRegistrar extends \Illuminate\Routing\ResourceRegistrar
      *
      * @return string
      */
-    protected function getGroupResourceName($prefix, $resource, $method)
+    protected function getGroupResourceName($prefix, $resource, $method): string
     {
         $group = ltrim(str_replace('/', '.', $this->router->getLastGroupPrefix()), '.');
 

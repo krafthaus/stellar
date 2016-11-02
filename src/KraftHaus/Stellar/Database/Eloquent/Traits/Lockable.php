@@ -11,39 +11,88 @@ namespace KraftHaus\Stellar\Database\Eloquent\Traits;
  * file that was distributed with this source code.
  */
 
+use KraftHaus\Stellar\Database\Eloquent\Models\Lock;
+use KraftHaus\Stellar\Database\Eloquent\Models\User;
+
 trait Lockable
 {
 
     /**
-     * @var array
+     * Lock this resource.
      */
-    protected $lockableOptions = [
-        'me', 'everyone'
-    ];
-
-    public function lock($unlockableBy)
+    public function lock()
     {
-        if (! in_array($unlockableBy, $this->lockableOptions)) {
-            throw new \InvalidArgumentException('Invalid lock strategy, try `me` or `everyone`.');
-        }
-
-        $this->lock_strategy = $unlockableBy;
-        $this->locked_by = auth()->user()->getKey();
-
-        return $this->save();
+        Lock::create($this->getLockableParameters());
     }
 
+    /**
+     * Unlock this resource.
+     *
+     * @return bool|void
+     */
     public function unlock()
     {
         if (! $this->isUnlockable()) {
-
+            return false;
         }
+
+        $this->getLockableResource()->delete();
     }
 
+    /**
+     * Is this resource locked?
+     *
+     * @return bool
+     */
+    public function isLocked()
+    {
+        return (bool) $this->getLockableResource();
+    }
+
+    /**
+     * Can this resource be unlocked?
+     *
+     * @return bool
+     */
     public function isUnlockable()
     {
-        if ($this->lock_strategy == 'everyone') {
+        $resource = $this->getLockableResource();
 
-        }
+        return ($resource->lock === Lock::EVERYONE
+            || ($resource->lock === Lock::ONLY_ME
+                && $this->lockedBy()->getKey() === auth()->user()->getKey()));
+    }
+
+    /**
+     * Return the user who locked this resource.
+     *
+     * @return User
+     */
+    public function lockedBy()
+    {
+        return $this->getLockableResource()->user();
+    }
+
+    /**
+     * Get the locked resource.
+     *
+     * @return Lock
+     */
+    protected function getLockableResource()
+    {
+        return Lock::where($this->getLockableResource())->first();
+    }
+
+    /**
+     * Get the lockable parameters.
+     * 
+     * @return array
+     */
+    protected function getLockableParameters()
+    {
+        return [
+            'resource_key' => $this->getKey(),
+            'resource_type' => get_class($this)
+        ];
     }
 }

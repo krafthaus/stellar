@@ -13,6 +13,8 @@ namespace KraftHaus\Stellar\Database\Eloquent\Models;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use KraftHaus\Stellar\Database\Eloquent\Traits\Activatable;
 
 class Website extends Model
@@ -29,17 +31,17 @@ class Website extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function pages()
+    public function pages(): HasMany
     {
         return $this->hasMany(Page::class);
     }
